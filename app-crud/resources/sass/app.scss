@@ -1,0 +1,22 @@
+// Fonts
+@import url('https://fonts.bunny.net/css?family=Nunito');
+
+// Variables
+@import 'variables';
+
+
+// Rendering Variables for background 
+// $primary:       $blue;
+// $secondary:     $gray-600;
+// $success:       $green;
+// $info:          $cyan;
+// $warning:       $yellow;
+ $danger:          $red;
+//$light:          $gray-100;
+ $dark:            $gray-dark;
+$black:            $blackv2; 
+
+// Bootstrap
+@import 'bootstrap/scss/bootstrap';
+
+
