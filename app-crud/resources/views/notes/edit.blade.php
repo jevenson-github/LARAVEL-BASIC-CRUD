@@ -8,11 +8,11 @@
       
     <form action="{{route('note.store')  }}" method="post"> 
         @csrf
-        <input type="hidden" name="userId" value="{{ Auth::user()->id }}">
+        <input type="hidden" name="notesId" value="{{$note->notesId}}">
         
         <div class="mb-3">
           <label for="exampleInputEmail1" class="form-label">Note Title</label>
-          <input type="text" name="title" class="form-control" value="{{ old('title') }}" id="exampleInputEmail1" placeholder="Title" aria-describedby="text">
+          <input type="text" name="title" class="form-control" value="{{ $note->title }}" id="exampleInputEmail1" placeholder="Title" aria-describedby="text">
           <div id="text" class="form-text"></div>
         </div>
         @error('title')
@@ -21,7 +21,7 @@
 
         <div class="form-floating">
             <textarea class="form-control" name="body" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px">
-            {{ old('body') }}
+            {{  $note->body }}
             </textarea>
             <label for="floatingTextarea2">Body</label>
         </div> 
@@ -29,11 +29,10 @@
             {{ $message }}
         @enderror
 
-
-
        <div class="mt-3">
-        <button type="submit" class="btn btn-primary">Submit</button> 
+        <button type="submit" class="btn btn-primary">Update</button> 
        </div>
       </form>
     </div>
+    
 @endsection

@@ -47,9 +47,9 @@ class NoteController extends Controller
      }
      //edit 
      public function edit($notesId) { 
-
-      $data = Note::where('notesId', $notesId)->get();
-      dd($data); 
-      // return view('notes.edit', ['note'=>$data]); 
+      
+      $data = Note::where('notesId', $notesId)->first();
+      // dd($data); 
+      return view('notes.edit', ['note'=> $data]); 
      }
 }
