@@ -73,5 +73,12 @@ class NoteController extends Controller
          // dd($notesId);
 
 
+     } 
+
+     // view notes 
+     public function view($notes){
+        $data = Note::where('notesId', $notes)->first();
+      //  return response()->json($data );
+       return response()->json($data, 200);
      }
 }

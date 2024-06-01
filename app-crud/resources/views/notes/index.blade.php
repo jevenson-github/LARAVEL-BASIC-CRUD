@@ -25,14 +25,60 @@
     @foreach ($notes as $note)
     <tr>
         <td>{{  $note['title'] }}</td>
-        <td>View</td> 
+        <td><a href="javascript:void(0)" class="show-note" data-url="{{route('note.view' ,  ['note' => $note->notesId] ) }}">View </a>
+        </td> 
         <td><a href="{{ route('note.edit', ['note' => $note->notesId]) }}">Edit</a></td>
         <td>Delete</td>
     </tr>
           
-    @endforeach
+    @endforeach  
+
+    {{-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#showNotesModal">
+      Launch demo modal
+    </button> --}}
+
+    <!-- Modal -->
+<div class="modal fade" id="showNotesModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel"></h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+     <p id="title" ></p>
+     <p id="body" ></p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+{{-- End of Modal  --}}
 </body>
 </table>
 </div>
 </div>
+@endsection 
+
+@section('jquery_script')
+<script> 
+
+  // View Notes using Ajax 
+    $(document).ready(function(){
+
+      $(".show-note").click( function(){ 
+        var userUrl =  $(this).data('url');  
+        $.get( userUrl, function( data ) {
+              $('#showNotesModal').modal('show');  
+                    $('#exampleModalLabel').text(data.title); 
+                    $('#body').text(data.body); 
+                // console.log(data); 
+            });
+      });
+    });
+    </script>
 @endsection

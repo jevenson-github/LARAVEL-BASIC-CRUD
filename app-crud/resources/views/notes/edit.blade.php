@@ -9,14 +9,14 @@
         <p>Click me away!</p>
         <p>Click me too!</p> --}}
 
-        
+          
     <form method="POST" action="{{ route('note.update', ['note'=> $note->notesId]) }}" > 
         
         {{-- to over ride the post method  --}}
         @method('PUT')
         @csrf
         <input type="hidden" name="notesId" value="{{$note->notesId}}">
-          
+
         <div class="mb-3">
           <label for="exampleInputEmail1" class="form-label">Note Title</label>
           <input type="text" name="title" class="form-control" value="{{ $note->title }}" id="exampleInputEmail1" placeholder="Title" aria-describedby="text">
@@ -44,12 +44,3 @@
     
 @endsection
 
-@section('jquery_script')
-<script>
-    $(document).ready(function(){
-      $("p").click(function(){
-        $(this).hide();
-      });
-    });
-    </script>
-@endsection
