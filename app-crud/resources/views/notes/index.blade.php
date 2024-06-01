@@ -25,7 +25,7 @@
     @foreach ($notes as $note)
     <tr>
         <td>{{  $note['title'] }}</td>
-        <td><a href="javascript:void(0)" class="show-note" data-url="{{route('note.view' ,  ['note' => $note->notesId] ) }}">View </a>
+        <td><button class="show-note bg-success" data-url="{{route('note.view' ,  ['note' => $note->notesId] ) }}">View </button>
         </td> 
         <td><a href="{{ route('note.edit', ['note' => $note->notesId]) }}">Edit</a></td>
         <td>Delete</td>
