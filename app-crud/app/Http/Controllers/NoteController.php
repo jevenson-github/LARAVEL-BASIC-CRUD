@@ -47,9 +47,31 @@ class NoteController extends Controller
      }
      //edit 
      public function edit($notesId) { 
-      
+
       $data = Note::where('notesId', $notesId)->first();
       // dd($data); 
       return view('notes.edit', ['note'=> $data]); 
+     }
+
+     public function update(Request $request, $notesId) { 
+
+          // validation 
+          $data = $request->validate([
+               'title' => 'required', 
+               'body' => 'required'
+          ]); 
+
+          // update process 
+
+         Note::where('notesId',$notesId)->update([
+            'title' =>$request->title,
+            'body' => $request->body
+         ]); 
+
+
+         return redirect(route('note.index'))->with('message','Note Updated Successfuly'); 
+         // dd($notesId);
+
+
      }
 }

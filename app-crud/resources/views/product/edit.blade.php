@@ -11,6 +11,7 @@
     {{-- Adding Error Validation Message and Retaining the old Value  --}}
     <form method="post" action="{{ route('product.update', ['product'=> $product]) }}">
         @csrf
+        {{-- to over ride the post method --}}
         @method('put')
 
         <div>

@@ -70,6 +70,7 @@ class ProductController extends Controller
             'description'=> 'nullable' 
         ]); 
 
+        
         $product->update($data); 
 
          // after the success insertion rediredt to index page with session message 
