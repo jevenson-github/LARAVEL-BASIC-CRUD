@@ -29,7 +29,7 @@
         <td><button class="show-note bg-success" data-url="{{route('note.view' ,  ['note' => $note->notesId] ) }}">View </button>
         </td> 
         <td><a href="{{ route('note.edit', ['note' => $note->notesId]) }}">Edit</a></td>
-        <td>Delete</td>
+        <td> <button class="delete-note" data-url="{{route('note.delete',['id' => $note->notesId]) }}">Delete</button> </td>
         <td>{{ date('F d, Y',$note->create_at) }}</td>
     </tr>
           
@@ -53,7 +53,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        {{-- <button type="button" class="btn btn-primary">Save changes</button> --}}
       </div>
     </div>
   </div>
@@ -73,7 +73,11 @@
     $(document).ready(function(){
 
       $(".show-note").click( function(){ 
-        var userUrl =  $(this).data('url');  
+
+        // get the value of the url 
+        var userUrl =  $(this).data('url'); 
+        
+        
         $.get( userUrl, function( data ) {
               $('#showNotesModal').modal('show');  
                     $('#exampleModalLabel').text(data.title); 
@@ -81,6 +85,67 @@
                 // console.log(data); 
             });
       });
-    });
+    }); 
+
+  
+    //Delete Notes using Sweet Alert  and Ajax Request 
+    $(document).ready(function(){ 
+     // start event 
+    $(".delete-note").click(function(){ 
+
+       // get the url of button 
+        var deleteUrl = $(this).data('url');  
+
+        Swal.fire({
+            title: "DELETE THESE NOTE?",
+            text: 'This article will be permanently deleted',
+            icon: "warning",
+            showCancelButton: true
+        }).then((result) => { 
+          // if start 
+            if (result.value) { 
+
+               // ajax process 
+                $.ajax({
+                    type: "DELETE",
+                    url: deleteUrl,
+                    data: {
+                        _token: '{{ csrf_token() }}'
+                    }, 
+
+                    // success function delete 
+                    success: function(response) {
+                        Swal.fire({
+                            icon: 'success',
+                            text: response.message, 
+                            showConfirmButton: false,
+                            timer: 3000
+                        }).then(function() { 
+                            location.reload();
+                        });
+                    }, 
+
+                    // DEBUGGING PURPOSE 
+                    error: function(xhr, status, error) {
+                        console.log(xhr.responseText); // Log the error response
+                        Swal.fire({
+                            icon: 'error',
+                            text: 'Oops, an error occurred.', // Message
+                            showConfirmButton: false,
+                            timer: 3000,
+                            position: 'top-end'
+                        });
+                    }
+                }); 
+                // end of ajax process 
+
+            }
+            // end if  
+        });
+    }); 
+    // end of event 
+});
+// enf document request 
+
     </script>
 @endsection

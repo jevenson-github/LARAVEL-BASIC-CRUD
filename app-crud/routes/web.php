@@ -47,3 +47,4 @@ Route::post('/note/store', [NoteController::class, 'store'])->name('note.store')
 Route::get('/note/edit/{note}', [NoteController::class, 'edit'])->name('note.edit')->middleware('is_user');
 Route::put('/note/update/{note}', [NoteController::class, 'update'])->name('note.update')->middleware('is_user'); 
 Route::get('/note/view/{note}', [NoteController::class, 'view'])->name('note.view')->middleware('is_user'); 
+Route::delete('/note/delete/{id}', [NoteController::class ,'delete'])->name('note.delete')->middleware('is_user'); 

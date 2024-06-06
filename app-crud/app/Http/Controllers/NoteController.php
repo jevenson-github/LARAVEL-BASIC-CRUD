@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Note; 
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class NoteController extends Controller
 {
@@ -38,7 +39,8 @@ class NoteController extends Controller
          'title'=> 'required', 
          'body' => 'required'
       ]); 
-
+     
+      
        // Add the authenticated user's ID to the data
        $data['userId'] = Auth::user()->id;
       Note::create($data); 
@@ -80,5 +82,17 @@ class NoteController extends Controller
         $data = Note::where('notesId', $notes)->first();
       //  return response()->json($data );
        return response()->json($data, 200);
+     }
+
+     //delete note 
+     public function delete($id){
+      
+      // cannot do becauase in the model the specified id is not notesId
+      // $note = Note::where('notesId', $note)->firstOrFail(); 
+      // $note->delete();  
+      DB::table('notes')->where('notesId', '=', $id)->delete();
+
+      return response()->json(['message' => 'Note Deleted Succesfuly'], 200); 
+
      }
 }

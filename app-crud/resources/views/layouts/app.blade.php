@@ -17,6 +17,8 @@
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
     {{-- jquery scripts --}}
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    {{-- sweet alert script  --}} 
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
     <div id="app">
@@ -64,11 +66,11 @@
                                  Home
                                   </a> 
                             </li> 
-                            <li class="nav-item dropdown"> 
+                            {{-- <li class="nav-item dropdown"> 
                                 <a class="nav-link  text-white " href="{{ route('product.index')  }}" >
                                   Product
                                 </a> 
-                            </li>   
+                            </li>    --}}
                             <li class="nav-item dropdown"> 
                                 <a class="nav-link  text-white " href="{{ route('note.index')  }}" >
                                  Notes
