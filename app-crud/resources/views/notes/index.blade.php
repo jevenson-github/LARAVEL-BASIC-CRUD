@@ -19,6 +19,7 @@
      <th>View</th>
      <th>Edit</th>
      <th>Delete</th>
+     <th>Date Created</th>
   <body>
     
  
@@ -29,6 +30,7 @@
         </td> 
         <td><a href="{{ route('note.edit', ['note' => $note->notesId]) }}">Edit</a></td>
         <td>Delete</td>
+        <td>{{ date('F d, Y',$note->create_at) }}</td>
     </tr>
           
     @endforeach  
